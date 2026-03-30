@@ -42,8 +42,6 @@ CA-ALLOWED-BREAKGLASS
 
 # 2. Baseline Policies (Recommended for All SLED Tenants)
 
----
-
 ## 2.1 Policy: Block Legacy Authentication  
 **Purpose:** Block insecure protocols (POP, IMAP, SMTP AUTH, MAPI over RPC, etc.)  
 **Why it matters:** Most credential‑stuffing and password spray attacks target legacy auth.
@@ -131,11 +129,7 @@ CA-ALLOWED-BREAKGLASS
 ---
 
 # 3. Admin & Privileged Access Policies
-
----
-These MUST be enabled after user-level baselines are stable.
-
----
+> These MUST be enabled after user-level baselines are stable.
 
 ## 3.1 Policy: Admin Access Requires Compliant or Hybrid-Joined Device
 **Purpose:** Require admins to operate from managed devices only.  
@@ -149,7 +143,7 @@ These MUST be enabled after user-level baselines are stable.
 - **Grant:** Require compliant device
 - **Session:** Sign-in frequency = 4 hours
 
-###JSON Example
+### JSON Example
 ```json
 {
   "displayName": "CA-REQ-COMPLIANT-DEVICE-ADMINS",
@@ -185,6 +179,7 @@ These MUST be enabled after user-level baselines are stable.
 ---
 
 ## 3.2 Policy: Admin MFA Enforcement (Privileged Roles)
+
 **Purpose:** Provide separate MFA controls for admin roles.  
 **Note:** Keep admin MFA seaprate from user MFA to prevent mis-scoped changes.
 
@@ -212,11 +207,10 @@ These MUST be enabled after user-level baselines are stable.
 
 ---
 
-#4. Location and Network Policies
-
----
+# 4. Location and Network Policies
 
 ## 4.1 Policy: Block Access From Certain Countries (High-Risk Regions)
+
 **Purpose:** Restrict sign-ins from regions your organization never expects logins from.  
 
 ### Policy Design
@@ -252,8 +246,6 @@ These MUST be enabled after user-level baselines are stable.
 
 # 5. Break-Glass Protection
 
----
-
 ## 5.1 Policy: Allow Break-Glass Accounts
 **Purpose:** Ensure emergency access remains available even when CA policies block administrators.
 
@@ -288,8 +280,6 @@ These MUST be enabled after user-level baselines are stable.
 
 # 6. Recommended Exemption Strategy
 
----
-
 ## 6.1 Service Accounts
 
 ---
@@ -299,6 +289,7 @@ These MUST be enabled after user-level baselines are stable.
 ---
 
 # 7. Operational Guidance
+
 **Monitor logs:**
 - Entra → Sign-in logs
 - Entra → Audit logs
