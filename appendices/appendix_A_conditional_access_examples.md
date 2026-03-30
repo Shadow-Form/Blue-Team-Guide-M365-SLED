@@ -26,13 +26,17 @@ Every policy should follow this deployment lifecycle:
 Use a predictable naming style aligned with your governance model.
 
 A good format is:
+```
 [CA]-[ACTION]-[CONDITION]-[TARGET]
+```
 
 Examples:  
+```
 CA-REQ-MFA-ALL-USERS
 CA-BLOCK-LEGACY-AUTH
 CA-REQ-COMPLIANT-DEVICE-ADMINS
 CA-ALLOWED-BREAKGLASS
+```
 
 ---
 
