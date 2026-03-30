@@ -257,8 +257,32 @@ These MUST be enabled after user-level baselines are stable.
 ## 5.1 Policy: Allow Break-Glass Accounts
 **Purpose:** Ensure emergency access remains available even when CA policies block administrators.
 
+**Best Practices:**
+- **Two** accounts
+- Phishing resistant FIDO2 key
+- Or long, offline-stored password, 48+ characters
+- Sentinel alerts for sign in activity
 
+### Policy Design
+- **Users:** Break-glass accounts
+- **Cloud apps:** All
+- **Grant:** Allow unconditionally
+- **Logging:** Configure Sentinel alert for any sign-in
 
+  ### JSON Example
+```json
+{
+  "displayName": "CA-ALLOW-BREAKGLASS",
+  "conditions": {
+    "users": { "includeGroups": [ "BreakGlassAccounts" ] }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": []
+  },
+  "state": "enabled"
+}
+```
 
 ---
 
@@ -268,22 +292,29 @@ These MUST be enabled after user-level baselines are stable.
 
 ## 6.1 Service Accounts
 
-
-
 ---
 
 ## 6.2 Vendors/Contractors
 
-
-
-
 ---
 
 # 7. Operational Guidance
+**Monitor logs:**
+- Entra → Sign-in logs
+- Entra → Audit logs
+- Defender XDR → User timeline
+- Sentinel → CA rule triggers, risk-based analytics
+
+**Quarterly Review:**
+- Exceptions
+- Named locations
+- Break-glass credentials
+- Directory roles
 
 ---
 
 # 8 . Summary
+These Conditional Access policies form the minimum viable identity perimeter for SLED Microsoft 365 environments. They reduce credential attacks, enforce MFA safely, constrain administrative actions, and support Zero Trust adoption with a structure friendly to small security teams.
 
 ---
 
