@@ -1,0 +1,7 @@
+SigninLogs
+| where Timestamp > ago(3d)
+| project Timestamp, UserPrincipalName, DeviceDetail, IPAddress, AppDisplayName, ConditionalAccessStatus, ResultType
+| extend DeviceId = tostring(DeviceDetail.DeviceId)
+| summarize distinctIPs=make_set(IPAddress), logins=count() by UserPrincipalName, DeviceId, AppDisplayName
+| where array_length(distinctIPs) >= 3 and logins >= 10
+| order by logins desc
