@@ -1,0 +1,13 @@
+let window = 30m;
+let fails = SigninLogs
+  | where Timestamp > ago(window)
+  | where ResultType != 0
+  | project UserPrincipalName, Timestamp, ResultType, IPAddress, AppDisplayName;
+let success = SigninLogs
+  | where Timestamp > ago(window)
+  | where ResultType == 0
+  | project UserPrincipalName, Timestamp, ResultType, IPAddress, AppDisplayName;
+fails
+| join kind=inner success on UserPrincipalName
+| where success.Timestamp > fails.Timestamp
+| project UserPrincipalName, fails.Timestamp, success.Timestamp, fails.IPAddress, success.IPAddress, AppDisplayName
