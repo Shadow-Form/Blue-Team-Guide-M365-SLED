@@ -1,1 +1,23 @@
-{}
+{
+  "platform": "windows10AndLater",
+  "rules": {
+    "osMinimumVersion": "10.0.19045.0",
+    "bitLockerRequired": true,
+    "secureBootRequired": true,
+    "tpmRequired": true,
+    "deviceHealthAttestationRequired": true
+  },
+  "defenderRequirements": {
+    "realTimeProtection": "enabled",
+    "cloudProtection": "enabled",
+    "engineVersionMinimum": "1.1.23000.4"
+  },
+  "firewall": {
+    "enabled": true,
+    "profiles": ["domain", "private", "public"]
+  },
+  "jailbreakDetection": false,
+  "deviceThreatProtection": {
+    "minimumRiskLevel": "low"
+  }
+}
