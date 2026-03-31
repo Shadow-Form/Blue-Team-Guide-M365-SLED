@@ -1,0 +1,8 @@
+let suspiciousDomains = dynamic(["gmail.com","yahoo.com","outlook.com","protonmail.com"]);
+ExchangeOnline
+| where Operation == "New-InboxRule" or Operation == "Set-InboxRule"
+| extend RuleData = parse_json(Parameters)
+| extend ForwardTo = tostring(RuleData.ForwardTo)
+| where ForwardTo has_any (suspiciousDomains)
+| project TimeGenerated, UserId, ForwardTo, RuleData, ResultStatus
+| order by TimeGenerated desc
