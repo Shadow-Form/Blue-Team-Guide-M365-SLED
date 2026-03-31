@@ -1,1 +1,21 @@
-{}
+{
+  "displayName": "CA-REQ-MFA-ALL-USERS",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeUsers": ["All"],
+      "excludeGroups": ["BreakGlassAccounts"]
+    },
+    "clientAppTypes": ["browser", "mobileAppsAndDesktopClients"]
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": ["mfa"]
+  },
+  "sessionControls": {
+    "signInFrequency": {
+      "value": 12,
+      "type": "hours"
+    }
+  }
+}
