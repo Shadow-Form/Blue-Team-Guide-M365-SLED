@@ -1,1 +1,17 @@
-{}
+{
+  "policyName": "SafeLinks-Baseline",
+  "enabled": true,
+  "applyTo": [
+    "ExchangeOnline",
+    "Teams",
+    "OfficeApps",
+    "SharePoint",
+    "OneDrive"
+  ],
+  "settings": {
+    "rewriteUrls": true,
+    "trackUserClicks": true,
+    "allowClickThrough": false,
+    "scanTime": "realTime"
+  }
+}
