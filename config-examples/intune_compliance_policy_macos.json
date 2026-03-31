@@ -1,0 +1,17 @@
+{
+  "platform": "macOS",
+  "rules": {
+    "fileVaultRequired": true,
+    "firewallEnabled": true,
+    "minimumOSVersion": "13.0",
+    "systemIntegrityProtection": true
+  },
+  "defenderRequirements": {
+    "sensorInstalled": true,
+    "minimumVersion": "101.23000.4"
+  },
+  "passwordPolicy": {
+    "minimumLength": 12,
+    "maxInactivityTimeoutMinutes": 15
+  }
+}
