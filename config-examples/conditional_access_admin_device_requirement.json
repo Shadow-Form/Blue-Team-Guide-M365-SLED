@@ -1,0 +1,28 @@
+{
+  "displayName": "CA-REQ-COMPLIANT-DEVICE-ADMINS",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeRoles": [
+        "62e90394-69f5-4237-9190-012177145e10",
+        "194ae4cb-b126-40b2-bd5b-6091b380977d"
+      ]
+    },
+    "devices": {
+      "deviceFilter": {
+        "mode": "include",
+        "rule": "device.trustType -in [\"Compliant\",\"HybridAzureADJoined\"]"
+      }
+    }
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": ["compliantDevice"]
+  },
+  "sessionControls": {
+    "signInFrequency": {
+      "value": 4,
+      "type": "hours"
+    }
+  }
+}
