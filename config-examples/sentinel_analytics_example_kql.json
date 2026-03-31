@@ -1,0 +1,14 @@
+{
+  "displayName": "Multiple MFA Failures Followed by Success",
+  "enabled": true,
+  "queryFrequency": "PT10M",
+  "queryPeriod": "PT30M",
+  "severity": "Medium",
+  "tactics": [
+    "CredentialAccess",
+    "InitialAccess"
+  ],
+  "query": "SigninLogs\n| where ResultType != 0\n| join kind=inner (\n    SigninLogs | where ResultType == 0\n) on UserPrincipalName\n| project UserPrincipalName, IPAddress, AppDisplayName, ResultType, Timestamp",
+  "triggerOperator": "GreaterThan",
+  "triggerThreshold": 1
+}
