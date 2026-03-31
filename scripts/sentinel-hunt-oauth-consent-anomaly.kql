@@ -1,0 +1,6 @@
+AADNonInteractiveUserSignInLogs
+| where Timestamp > ago(7d)
+| where AppDisplayName has "Consent" or AppId in ("04b07795-8ddb-461a-bbee-02f9e1bf7b46") // Azure Portal consent scenario
+| summarize Events=count() by AppDisplayName, UserPrincipalName, IPAddress
+| where Events > 5
+| order by Events desc
