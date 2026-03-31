@@ -1,0 +1,7 @@
+OfficeActivity
+| where TimeGenerated > ago(1d)
+| where RecordType == "SharePointFileOperation"
+| where Operation in ("FileDownloaded","FileSyncDownloadedFull")
+| summarize Downloads=count(), Files=make_set(ObjectId) by UserId, bin(TimeGenerated, 15m), SourceFileExtension
+| where Downloads > 100 // tune threshold
+| project TimeGenerated, UserId, Downloads, Files, SourceFileExtension
