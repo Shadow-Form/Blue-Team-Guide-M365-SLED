@@ -1,0 +1,16 @@
+{
+  "policyName": "SafeAttachments-Baseline",
+  "dynamicDelivery": true,
+  "malwareAction": "replace",
+  "zapEnabled": true,
+  "workloads": [
+    "ExchangeOnline",
+    "SharePoint",
+    "OneDrive",
+    "Teams"
+  ],
+  "notificationSettings": {
+    "notifyAdminOnMalware": true,
+    "notifyUserOnMalware": false
+  }
+}
