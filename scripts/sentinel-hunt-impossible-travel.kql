@@ -1,1 +1,12 @@
-KQL query...
+let thresholdKm = 5000; // adjust based on policy
+SigninLogs
+| extend prev = lag(LocationDetails, 1)
+| where prev.Country != Country
+| extend DistanceKm = geo_distance_2points(
+    todouble(LocationDetails.Latitude),
+    todouble(LocationDetails.Longitude),
+    todouble(prev.Latitude),
+    todouble(prev.Longitude))
+| where DistanceKm > thresholdKm
+| project Timestamp, UserPrincipalName, IPAddress, Country, prev, DistanceKm, AppDisplayName, ConditionalAccessStatus
+| order by Timestamp desc
