@@ -1,1 +1,43 @@
-{}
+{
+  "playbookName": "Disable-Forwarding-Rule",
+  "trigger": {
+    "type": "Microsoft.SecurityInsights.Incident",
+    "conditions": {
+      "incidentProperties": {
+        "titleContains": "forwarding",
+        "severity": ["High", "Medium"]
+      }
+    }
+  },
+  "actions": [
+    {
+      "type": "ExchangeOnline.RemoveInboxRule",
+      "parameters": {
+        "ruleName": "ForwardToExternal",
+        "userId": "@{triggerBody().userPrincipalName}"
+      }
+    },
+    {
+      "type": "Teams.PostMessage",
+      "parameters": {
+        "team": "Security",
+        "channel": "Incidents",
+        "message": "Forwarding rule removed for user."
+      }
+    },
+    {
+      "type": "AzureAD.RevokeSession",
+      "parameters": {
+        "user": "@{triggerBody().userPrincipalName}"
+      }
+    },
+    {
+      "type": "LogAnalytics.Write",
+      "parameters": {
+        "workspaceId": "/subscriptions/.../resourceGroups/.../providers/Microsoft.OperationalInsights/workspaces/SOC",
+        "logType": "PlaybookAudit",
+        "message": "Forwarding rule removed"
+      }
+    }
+  ]
+}
